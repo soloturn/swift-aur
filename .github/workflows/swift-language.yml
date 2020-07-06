@@ -7,6 +7,9 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  schedule:
+  - cron: "0 0 * * *"
+
 
 jobs:
   build:
@@ -17,4 +20,4 @@ jobs:
       uses: DuckSoft/build-aur-action@v1.0
       with:
         # AUR repository name to build
-        repo-name: swift-language-git
+        repo-name: swift
