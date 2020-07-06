@@ -1,2 +1,2 @@
 # swift-aur
-arch linux aur swift language
+arch linux aur swift language.
