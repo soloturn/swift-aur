@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build AUR Package
-      uses: DuckSoft/build-aur-action@v1.0
+    - name: Build AUR package with yay
+      uses: soloturn/build-aur-action@0.0.1
       with:
         # AUR repository name to build
         repo-name: swift-language-git
