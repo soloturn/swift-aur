@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: Build AUR package with yay
-      uses: soloturn/build-aur-action@0.0.1
+      uses: soloturn/build-aur-action@0.0.2
       with:
         # AUR repository name to build
         repo-name: swift-language-git
