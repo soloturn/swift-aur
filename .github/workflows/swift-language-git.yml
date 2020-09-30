@@ -1,4 +1,4 @@
-name: swift-language sundays
+name: swift-language-git ci
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-  - cron: "23 2 * * 0"
+  - cron: "0 */3 * * *"
 
 
 jobs:
@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build swift-language
+    - name: Build swift-language-git AUR
       uses: soloturn/build-aur-action@0.0.2
       with:
         # AUR repository name to build
-        repo-name: swift-language
+        repo-name: swift-language-git
