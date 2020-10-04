@@ -21,3 +21,9 @@ jobs:
       with:
         # AUR repository name to build
         repo-name: swift-language-git
+
+    - name: Upload arch pkg
+      uses: actions/upload-artifact@v2
+      with:
+        name: '*.zst'
+        path: .
