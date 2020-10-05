@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: sccache swift-language-git
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/work/swift-aur/swift-aur/swift-language-git/src/sccache
+        key: swift-language-git-sccache
+
     - name: Build swift-language-git AUR
       uses: soloturn/build-aur-action@0.0.2
       with:
         # AUR repository name to build
         repo-name: swift-language-git
-
-    - name: sccache swift-language-git
-      uses: actions/cache@v2
-      with:
-        path: /home/runner/work/swift-aur/swift-aur/swift-language-git/sccache
-        key: swift-language-git-sccache
 
     - name: Upload arch pkg
       uses: actions/upload-artifact@v2
