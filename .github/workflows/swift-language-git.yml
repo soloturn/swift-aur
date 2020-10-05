@@ -18,16 +18,17 @@ jobs:
         # AUR repository name to build
         repo-name: swift-language-git
 
-    - name: Cache multiple paths
+    - name: sccache swift-language-git
       uses: actions/cache@v2
       with:
-        path: ~/cache
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+        path: /home/runner/work/swift-aur/swift-aur/swift-language-git/sccache
+        key: swift-language-git-sccache
 
     - name: Upload arch pkg
       uses: actions/upload-artifact@v2
       with:
-        name: '/home/runner/work/swift-aur/swift-aur/swift-language-git/*.zst'
-        path: .
+        name: zipped-arch-package
+        path: /home/runner/work/swift-aur/swift-aur/swift-language-git/*.zst
+
 
 # vim:set ts=2 sw=2 et:
