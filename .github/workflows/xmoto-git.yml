@@ -1,0 +1,25 @@
+name: xmoto-git ci
+
+on:
+  schedule:
+  - cron: "43 2 * * 0"
+
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build xmoto-git AUR
+      uses: soloturn/build-aur-action@0.0.2
+      with:
+        repo-name: xmoto-git
+
+    - name: Upload arch pkg
+      uses: actions/upload-artifact@v2
+      with:
+        path: /home/runner/work/swift-aur/swift-aur/xmoto-git/*.zst
+
+# vim:set ts=2 sw=2 et:
