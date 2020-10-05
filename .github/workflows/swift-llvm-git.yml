@@ -1,0 +1,34 @@
+name: swift-llvm-git ci
+
+on:
+  schedule:
+  - cron: "48 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: sccache swift-llvm-git
+      uses: actions/cache@v2
+      with:
+        path: |
+          /home/runner/work/swift-aur/swift-aur/swift-llvm-git/src/sccache
+          /var/cache/pacman/pkg/
+        key: swift-llvm-git-sccache
+
+    - name: Build swift-llvm-git AUR
+      uses: soloturn/build-aur-action@0.0.2
+      with:
+        # AUR repository name to build
+        repo-name: swift-llvm-git
+
+    - name: Upload arch pkg
+      uses: actions/upload-artifact@v2
+      with:
+        name: zipped-arch-package
+        path: /home/runner/work/swift-aur/swift-aur/swift-llvm-git/*.zst
+
+
+# vim:set ts=2 sw=2 et:
