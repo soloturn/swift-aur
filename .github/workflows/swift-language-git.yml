@@ -4,7 +4,7 @@ name: swift-language-git ci
 # events but only for the master branch
 on:
   schedule:
-  - cron: "0 */3 * * *"
+  - cron: "48 */6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,9 @@ jobs:
     - name: sccache swift-language-git
       uses: actions/cache@v2
       with:
-        path: /home/runner/work/swift-aur/swift-aur/swift-language-git/src/sccache
+        path: |
+          /home/runner/work/swift-aur/swift-aur/swift-language-git/src/sccache
+          /var/cache/pacman/pkg/
         key: swift-language-git-sccache
 
     - name: Build swift-language-git AUR
