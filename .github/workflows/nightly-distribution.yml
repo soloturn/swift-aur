@@ -1,0 +1,17 @@
+name: Nightly distribution
+on:
+  schedule:
+    - cron: '34 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  nightly-distribution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: bash distribute-latest-swift
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# vim:set ts=2 sw=2 et:
+

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -xe
+repository='soloturn/swift-aur'
+workflow_name='swift-llvm-git.yml'
+branch=master
+
+gh_api=https://api.github.com
+
+github() {
+  curl --header "authorization: Bearer $GITHUB_TOKEN" "$@"
+}
+
+latest_run=$(github "${gh_api}/repos/${repository}/actions/workflows/${workflow_name}/runs?head_branch=${branch}&status=completed&conclusion=success" \
+  | jq ".workflow_runs | map(select(.head_branch == \"$branch\")) | sort_by(.run_number) | last")
+
+if [ -z "$latest_run" ] || [ "$latest_run" == "null" ]; then
+  echo "No successful runs available"
+  exit 0
+fi
+
+artifacts_url=$(echo $latest_run | jq .artifacts_url --raw-output)
+head_sha=$(echo $latest_run | jq .head_sha --raw-output)
+
+get_artifact_url() {
+  local name=$1
+  github $artifacts_url --fail | jq ".artifacts[] | select(.name == \"$name\") | .archive_download_url" | sed 's/\"//g'
+}
+
+download_artifact() {
+  local name=$1
+  local artifact_url="$(get_artifact_url $name)"
+
+  if [ -z "$artifact_url" ] || [ "$artifact_url" == "null" ]; then
+    echo "No successfully built artifacts available for $name"
+    exit 0
+  fi
+
+  github -L "$artifact_url" --fail -o "$name.zip"
+}
+
+tmp_dir=$(mktemp -d)
+pushd $tmp_dir
+download_artifact zipped-arch-package
+unzip zipped-arch-package.zip
+
+ls -l *.zst
+
+popd
+
+# vim:set ts=2 sw=2 et:
+
