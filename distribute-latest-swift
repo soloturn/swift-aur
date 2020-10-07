@@ -39,12 +39,35 @@ download_artifact() {
   github -L "$artifact_url" --fail -o "$name.zip"
 }
 
+get_release_id() {
+  response=$(github https://api.github.com/repos/soloturn/swift-aur/releases/latest)
+  echo $response | jq -r .id
+}
+
+upload_tarball() {
+  local release_id=$1
+  local artifact=$2
+  local filename=$(basename $artifact)
+
+  github -XPOST --fail \
+    -H "Content-Length: $(stat --printf="%s" "$artifact")" \
+    -H "Content-Type: application/x-gzip" \
+    --upload-file "$artifact" \
+    "https://uploads.github.com/repos/$repository/releases/$release_id/assets?name=$filename"
+}
+
 tmp_dir=$(mktemp -d)
 pushd $tmp_dir
 download_artifact zipped-arch-package
 unzip zipped-arch-package.zip
 
-ls -l *.zst
+# make sure files is empty if glob fails to match any files
+release_id=$(get_release_id)
+shopt -s nullglob
+for file in *.zst
+do
+  upload_tarball $release_id "$file"
+done
 
 popd
 
