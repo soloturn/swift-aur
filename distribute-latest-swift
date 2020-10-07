@@ -2,16 +2,16 @@
 
 set -xe
 repository='soloturn/swift-aur'
-workflow_name='swift-llvm-git.yml'
+workflow_name='swift-language-git.yml'
 branch=master
 
-gh_api=https://api.github.com
+gh_api=https://api.github.com/repos/${repository}
 
 github() {
   curl --header "authorization: Bearer $GITHUB_TOKEN" "$@"
 }
 
-latest_run=$(github "${gh_api}/repos/${repository}/actions/workflows/${workflow_name}/runs?head_branch=${branch}&status=completed&conclusion=success" \
+latest_run=$(github "${gh_api}/actions/workflows/${workflow_name}/runs?head_branch=${branch}&status=completed&conclusion=success" \
   | jq ".workflow_runs | map(select(.head_branch == \"$branch\")) | sort_by(.run_number) | last")
 
 if [ -z "$latest_run" ] || [ "$latest_run" == "null" ]; then
@@ -40,7 +40,7 @@ download_artifact() {
 }
 
 get_release_id() {
-  response=$(github https://api.github.com/repos/soloturn/swift-aur/releases/latest)
+  response=$(github ${gh_api}/releases/latest)
   echo $response | jq -r .id
 }
 
