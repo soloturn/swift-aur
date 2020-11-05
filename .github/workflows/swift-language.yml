@@ -13,8 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: sccache swift-language
+      uses: actions/cache@v2
+      with:
+        path: |
+          /home/runner/work/swift-aur/swift-aur/swift-language/src/sccache
+          /var/cache/pacman/pkg/
+        key: swift-language-sccache
+
     - name: Build swift-language
       uses: soloturn/build-aur-action@0.0.2
       with:
         # AUR repository name to build
         repo-name: swift-language
+
+# vim:set ts=2 sw=2 et:
+
