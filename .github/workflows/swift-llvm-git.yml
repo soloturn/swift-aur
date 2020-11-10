@@ -2,7 +2,7 @@ name: swift-llvm-git ci
 
 on:
   schedule:
-  - cron: "48 23 * * *"
+  - cron: "48 23 * * 6"
   workflow_dispatch:
 
 jobs:
