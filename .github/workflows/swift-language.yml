@@ -27,5 +27,11 @@ jobs:
         # AUR repository name to build
         repo-name: swift-language
 
+    - name: Upload arch pkg
+      uses: actions/upload-artifact@v2
+      with:
+        name: zipped-arch-package
+        path: /home/runner/work/swift-aur/swift-aur/swift-language/*.zst
+
 # vim:set ts=2 sw=2 et:
 
