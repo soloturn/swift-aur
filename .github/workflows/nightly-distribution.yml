@@ -1,7 +1,7 @@
-name: Nightly distribution
+name: Nightly distribution, 3rd of month
 on:
   schedule:
-    - cron: '34 4 * * *'
+    - cron: '34 4 3 * *'
   workflow_dispatch:
 
 jobs:
