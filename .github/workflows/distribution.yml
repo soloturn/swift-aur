@@ -7,13 +7,13 @@ on:
 jobs:
   distribution:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        wfname: [swift-language.yml, swift-language-git.yml] 
+#    strategy:
+#      matrix:
+#        wfname: [swift-language.yml, swift-language-git.yml] 
 
     steps:
       - uses: actions/checkout@v2
-      - run: bash distribute-latest-swift ${{ matrix.wfname }}
+      - run: bash distribute-latest-swift swift-language.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
