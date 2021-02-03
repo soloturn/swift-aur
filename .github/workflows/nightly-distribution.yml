@@ -7,9 +7,13 @@ on:
 jobs:
   nightly-distribution:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workflow_name: [swift-language-git.yml, swift-language-git.yml] 
+
     steps:
       - uses: actions/checkout@v2
-      - run: bash distribute-latest-swift
+      - run: bash distribute-latest-swift ${{ matrix.workflow_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
