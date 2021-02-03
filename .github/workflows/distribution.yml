@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        workflow_name: [swift-language-git.yml, swift-language-git.yml] 
+        workflow_name: [swift-language.yml, swift-language-git.yml] 
 
     steps:
       - uses: actions/checkout@v2
