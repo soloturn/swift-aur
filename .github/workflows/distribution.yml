@@ -1,4 +1,4 @@
-name: Nightly distribution, 3rd of month
+name: distribution, 3rd of month
 on:
   schedule:
     - cron: '34 4 3 * *'
