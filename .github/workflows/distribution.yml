@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        workflow_name: [swift-language.yml, swift-language-git.yml] 
+        wfname: [swift-language.yml, swift-language-git.yml] 
 
     steps:
       - uses: actions/checkout@v2
-      - run: bash distribute-latest-swift ${{ matrix.workflow_name }}
+      - run: bash distribute-latest-swift ${{ matrix.wfname }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
