@@ -19,7 +19,7 @@ jobs:
         key: swift-llvm-git-sccache
 
     - name: Build swift-llvm-git AUR
-      uses: soloturn/build-aur-action@0.0.2
+      uses: soloturn/build-aur-action@0.0.3
       with:
         # AUR repository name to build
         repo-name: swift-llvm-git
