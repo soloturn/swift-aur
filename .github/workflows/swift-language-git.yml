@@ -21,7 +21,7 @@ jobs:
         key: swift-language-git-sccache
 
     - name: Build swift-language-git AUR
-      uses: soloturn/build-aur-action@0.0.3
+      uses: soloturn/build-aur-action@0.0.5
       with:
         # AUR repository name to build
         repo-name: swift-language-git

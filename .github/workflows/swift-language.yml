@@ -22,7 +22,7 @@ jobs:
         key: swift-language-sccache
 
     - name: Build swift-language
-      uses: soloturn/build-aur-action@0.0.3
+      uses: soloturn/build-aur-action@0.0.5
       with:
         # AUR repository name to build
         repo-name: swift-language
